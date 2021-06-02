@@ -4,7 +4,7 @@ on:
   schedule:
     # * is a special character in YAML so you have to quote this string
     - cron:  '* * * * *'
-
+ 
 jobs:
   emailbot:
     runs-on: ubuntu-latest
