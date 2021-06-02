@@ -1,11 +1,11 @@
 name: 'GitHub Actions CSDN Email Bot'
 
 on:
-  push:
-    branches: 
-      - main
+#   push:
+#     branches: 
+#       - main
   schedule:
-    - cron: '8 5,12,16 * * *'
+    - cron: '0 0,4,16 * * *'
 
 jobs:
   emailbot:
@@ -33,5 +33,5 @@ jobs:
           subject: 宝宝&&问候
           body: file://emailtext.txt
           to: ${{ secrets.RECEIVER }}
-          from: YOU OLD BABY
+          from: YOUR OLD BABY
           content_type: text/plain
