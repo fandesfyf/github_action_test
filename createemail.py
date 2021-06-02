@@ -4,10 +4,12 @@
 # @Author  : Fandes
 # @FileName: test.py
 # @Software: PyCharm
+import datetime
 import random
 import sys
 import time
 
+import pytz
 import requests
 
 
@@ -57,10 +59,14 @@ def get_weather():
         print(sys.exc_info())
         print(Exception)
         return None, None
-
+def gethour():
+    cn = pytz.country_timezones('cn')[0]
+    tz = pytz.timezone(cn)
+    return datetime.datetime.now(tz).hour
 
 def get_email():
-    now = time.localtime().tm_hour+8
+    now = gethour()
+    print(now)
     try:
         weatherstr, d = get_weather()
         high = int(str(d["data"]["forecast"][0]["high"]).split(" ")[-1][:2])
@@ -99,7 +105,6 @@ def get_email():
     print(emailstr)
     with open("emailtext.txt", "w", encoding="utf-8") as f:
         f.write(emailstr)
-
 
 if __name__ == '__main__':
     get_email()
