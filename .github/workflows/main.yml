@@ -1,11 +1,8 @@
 name: 'GitHub Actions CSDN Email Bot'
 
 on:
-  push:
-      branches: [ master ]
   schedule:
-    # 定时任务，在每天的5点执行任务
-    - cron: '36 * * * *'
+    - cron: '5 * * * *'
 
 jobs:
   emailbot:
