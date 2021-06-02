@@ -8,7 +8,6 @@ import datetime
 import random
 import sys
 import time
-
 import pytz
 import requests
 
@@ -19,14 +18,14 @@ def get_iciba_everyday():
     bee = eed.json()  # 返回的数据
     english = bee['content']
     zh_CN = bee['note']
-    str = '【奇怪的知识】\n' + english + '\n' + zh_CN
+    str = '【others】\n' + english + '\n' + zh_CN
     return str
 
 
 def get_weather():
     try:
         api = 'http://t.weather.itboy.net/api/weather/city/'  # API地址，必须配合城市代码使用
-        city_code = '101110105'  # 进入https://where.heweather.com/index.html查询你的城市代码
+        city_code = '101281901'  # 进入https://where.heweather.com/index.html查询你的城市代码
         tqurl = api + city_code
         response = requests.get(tqurl)
         d = response.json()  # 将数据以json形式返回，这个d就是返回的json数据
@@ -52,17 +51,22 @@ def get_weather():
                    "\n日期： " + date + "\n星期: " + week + "\n天气: " + weather_type + "\n温度: " + wendu_high + " / " + wendu_low + "\n湿度: " + \
                    shidu + "\nPM25: " + pm25 + "\nPM10: " + pm10 + "\n空气质量: " + quality + \
                    "\n风力风向: " + fx + fl + "\n感冒指数: " + ganmao + "\n温馨提示： " + tips + "\n更新时间: " + update_time + "\n✁-----------------------------------------\n" + get_iciba_everyday()
-            # print(tdwt)
+            print(tdwt)
             return tdwt, d
             # requests.post(cpurl,tdwt.encode('utf-8'))         #把天气数据转换成UTF-8格式，不然要报错。
     except Exception:
         print(sys.exc_info())
         print(Exception)
         return None, None
+
+
 def gethour():
     cn = pytz.country_timezones('cn')[0]
     tz = pytz.timezone(cn)
-    return datetime.datetime.now(tz).hour
+    t=datetime.datetime.now(tz)
+    print(t)
+    return t.hour
+
 
 def get_email():
     now = gethour()
@@ -86,13 +90,13 @@ def get_email():
             emailstr = "宝宝中午好\n" + tips
         else:
             if "注意保暖" in weatherstr:
-                tips = "天气有点凉了,记得盖好被子!"
-            elif high > 30 and random.randint(0, 80) % 5 == 0:
-                tips = "空调不要开太低!小心着凉!"
+                tips += "天气有点凉了,记得盖好被子!\n"
+            if high > 30 and random.randint(0, 80) % 5 == 0:
+                tips += "空调不要开太低!小心着凉!\n"
             if random.randint(0, 80) % 5 == 0:
-                tips = "别告诉我你又跑出去了 哼~"
-            elif random.randint(0, 80) % 5 == 0:
-                tips = "放下那手机!"
+                tips += "别告诉我你又跑出去了 哼~"
+            if random.randint(0, 80) % 5 == 0:
+                tips += "放下那手机!"
             emailstr = "宝宝晚安!\n" if random.randint(0, 20) % 2 == 0 else "宝宝该睡觉了\n" + tips
     except:
         print(sys.exc_info(), 92)
@@ -105,6 +109,7 @@ def get_email():
     print(emailstr)
     with open("emailtext.txt", "w", encoding="utf-8") as f:
         f.write(emailstr)
+
 
 if __name__ == '__main__':
     get_email()
