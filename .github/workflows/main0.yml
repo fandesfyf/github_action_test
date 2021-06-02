@@ -1,9 +1,9 @@
-name: 'GitHub Actions CSDN Email Bot'
+name: 'GitHub Actions Email Bot'
 
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '3 * * * *'
+    - cron:  '5 * * * *'
 
 jobs:
   emailbot:
