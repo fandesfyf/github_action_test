@@ -56,11 +56,11 @@ def get_weather():
     except Exception:
         print(sys.exc_info())
         print(Exception)
-        return None,None
+        return None, None
 
 
 def get_email():
-    now = time.localtime().tm_hour
+    now = time.localtime().tm_hour+8
     try:
         weatherstr, d = get_weather()
         high = int(str(d["data"]["forecast"][0]["high"]).split(" ")[-1][:2])
@@ -87,17 +87,17 @@ def get_email():
                 tips = "别告诉我你又跑出去了 哼~"
             elif random.randint(0, 80) % 5 == 0:
                 tips = "放下那手机!"
-            emailstr = "宝宝晚安!\n"if random.randint(0,20)%2==0else "宝宝该睡觉了\n" + tips
+            emailstr = "宝宝晚安!\n" if random.randint(0, 20) % 2 == 0 else "宝宝该睡觉了\n" + tips
     except:
-        print(sys.exc_info(),92)
-        if now<6:
-            emailstr="宝宝早上好"
-        elif now<15:
-            emailstr="宝宝中午好"
+        print(sys.exc_info(), 92)
+        if now < 6:
+            emailstr = "宝宝早上好"
+        elif now < 15:
+            emailstr = "宝宝中午好"
         else:
-            emailstr="宝宝快睡觉,晚安!"
+            emailstr = "宝宝快睡觉,晚安!"
     print(emailstr)
-    with open("emailtext.txt","w",encoding="utf-8") as f:
+    with open("emailtext.txt", "w", encoding="utf-8") as f:
         f.write(emailstr)
 
 
