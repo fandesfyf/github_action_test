@@ -1,0 +1,37 @@
+name: 'GitHub Actions CSDN Email Bot'
+
+on:
+  push:
+    branches: 
+      - main
+  schedule:
+    - cron: '0 5,12,16 * * *'
+
+jobs:
+  emailbot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: 'Set up Python'
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      # - name: 'Install dependencies'
+      #   run: python -m pip install --upgrade pip
+      - name: 'Install requirements'
+        run: pip install -r ./requirements.txt
+      - name: 'Working'
+        run: bash ./main.sh
+      - name: 'Send mail'
+        uses: dawidd6/action-send-mail@master
+        with:
+          server_address: smtp.qq.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: CSDN Report
+          body: file://email.txt
+          to: ${{ secrets.RECEIVER }}
+          from: GitHub Actions
+          content_type: text/plain
