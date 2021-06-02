@@ -5,7 +5,7 @@ on:
       branches: [ master ]
   schedule:
     # 定时任务，在每天的5点执行任务
-    - cron: '26 * * * *'
+    - cron: '36 * * * *'
 
 jobs:
   emailbot:
