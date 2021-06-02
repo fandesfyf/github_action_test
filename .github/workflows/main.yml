@@ -5,7 +5,7 @@ on:
     branches: 
       - main
   schedule:
-    - cron: '5 5,12,16 * * *'
+    - cron: '8 5,12,16 * * *'
 
 jobs:
   emailbot:
@@ -31,7 +31,7 @@ jobs:
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: CSDN Report
-          body: file://email.txt
+          body: file://emailtext.txt
           to: ${{ secrets.RECEIVER }}
           from: GitHub Actions
           content_type: text/plain
