@@ -5,7 +5,7 @@ on:
 #     branches: 
 #       - main
   schedule:
-    - cron: '0 0,4,10,16 * * *'
+    - cron: '3 0,4,10,16 * * *'
 
 jobs:
   emailbot:
