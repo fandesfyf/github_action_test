@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python email.py
+python sendemail.py
