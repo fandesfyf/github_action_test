@@ -63,7 +63,7 @@ def get_weather():
 def gethour():
     cn = pytz.country_timezones('cn')[0]
     tz = pytz.timezone(cn)
-    t=datetime.datetime.now(tz)
+    t = datetime.datetime.now(tz)
     print(t)
     return t.hour
 
@@ -75,19 +75,21 @@ def get_email():
         weatherstr, d = get_weather()
         high = int(str(d["data"]["forecast"][0]["high"]).split(" ")[-1][:2])
         tips = ""
-        if now <= 8:
+        if 4 < now <= 10:
             if "雨" in weatherstr:
                 tips = "今天要下雨了噢,记得带伞!\n"
-
             emailstr = "宝宝早上好\n" + tips + weatherstr
-        elif now <= 15:
+        elif 10 < now <= 18:
             if high > 30 and random.randint(0, 80) % 2 == 0:
                 tips = "天气好热啊,记得多喝水!"
             elif "干燥" in weatherstr and random.randint(0, 80) % 3 == 0:
                 tips = "天气好干燥啊,记得多喝热水!\n"
             if random.randint(0, 80) % 3 == 0:
                 tips += "有没有好好起床吃饭\n"
-            emailstr = "宝宝中午好\n" + tips
+            if now <= 15:
+                emailstr = "宝宝中午好\n" + tips
+            else:
+                emailstr = "宝宝下午好\n" + tips
         else:
             if "注意保暖" in weatherstr:
                 tips += "天气有点凉了,记得盖好被子!\n"
@@ -100,7 +102,7 @@ def get_email():
             emailstr = "宝宝晚安!\n" if random.randint(0, 20) % 2 == 0 else "宝宝该睡觉了\n" + tips
     except:
         print(sys.exc_info(), 92)
-        if now < 6:
+        if now < 10:
             emailstr = "宝宝早上好"
         elif now < 15:
             emailstr = "宝宝中午好"
