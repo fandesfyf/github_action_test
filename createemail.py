@@ -12,20 +12,20 @@ import pytz
 import requests
 
 
-def get_iciba_everyday():
+def get_iciba_everyday(a=True):
     icbapi = 'http://open.iciba.com/dsapi/'
     eed = requests.get(icbapi)
     bee = eed.json()  # 返回的数据
     english = bee['content']
     zh_CN = bee['note']
-    str = '【others】\n' + english + '\n' + zh_CN
+    str = '【others】\n'if a else ""+ english + '\n' + zh_CN
     return str
 
 
 def get_weather():
     try:
         api = 'http://t.weather.itboy.net/api/weather/city/'  # API地址，必须配合城市代码使用
-        city_code = '101281901'  # 进入https://where.heweather.com/index.html查询你的城市代码
+        city_code = '101280604'  # 进入https://where.heweather.com/index.html查询你的城市代码
         tqurl = api + city_code
         response = requests.get(tqurl)
         d = response.json()  # 将数据以json形式返回，这个d就是返回的json数据
@@ -101,7 +101,7 @@ def get_email():
                 tips += "别告诉我你又跑出去了 哼~"
             if random.randint(0, 80) % 5 == 0:
                 tips += "放下那手机!"
-            emailstr = "宝宝晚安!\n" if random.randint(0, 20) % 2 == 0 else "宝宝该睡觉了\n" + tips
+            emailstr = "宝宝晚安!\n"+get_iciba_everyday(False) if random.randint(0, 20) % 2 == 0 else "宝宝该睡觉了\n" + tips
     except:
         print(sys.exc_info(), 92)
         if now < 10:
