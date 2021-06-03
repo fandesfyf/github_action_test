@@ -64,7 +64,9 @@ def gethour():
     cn = pytz.country_timezones('cn')[0]
     tz = pytz.timezone(cn)
     t = datetime.datetime.now(tz)
+
     print(t)
+    print(datetime.datetime.now())
     return t.hour
 
 
