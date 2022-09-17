@@ -4,7 +4,7 @@ on:
   push:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '6 * * * *'
+    - cron:  '54 15 * * *'
  
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -32,8 +32,8 @@ jobs:
           server_port: 465
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
-          subject: 宝宝&&问候
+          subject: 辛苦一天了，晚安啦
           body: file://emailtext.txt
           to: ${{ secrets.MAIL_USERNAME }}
-          from: YOUR OLD BABY
+          from: Github action
           content_type: text/plain
