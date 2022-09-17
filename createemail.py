@@ -80,18 +80,18 @@ def get_email():
         if 4 < now <= 10:
             if "雨" in weatherstr:
                 tips = "今天要下雨了噢,记得带伞!\n"
-            emailstr = "宝宝早上好\n" + tips + weatherstr
+            emailstr = "早上好啊宝\n" + tips + weatherstr
         elif 10 < now <= 18:
             if high > 30 and random.randint(0, 80) % 2 == 0:
                 tips = "天气好热啊,记得多喝水!"
             elif "干燥" in weatherstr and random.randint(0, 80) % 3 == 0:
                 tips = "天气好干燥啊,记得多喝热水!\n"
             if random.randint(0, 80) % 3 == 0:
-                tips += "有没有好好起床吃饭\n"
+                tips += "记得好好吃饭\n"
             if now <= 15:
-                emailstr = "宝宝中午好\n" + tips
+                emailstr = "中午好啊宝\n" + tips
             else:
-                emailstr = "宝宝下午好\n" + tips
+                emailstr = "宝，下午好啊\n" + tips
         else:
             if "注意保暖" in weatherstr:
                 tips += "天气有点凉了,记得盖好被子!\n"
@@ -105,11 +105,11 @@ def get_email():
     except:
         print(sys.exc_info(), 92)
         if now < 10:
-            emailstr = "宝宝早上好"
+            emailstr = "早上好宝"
         elif now < 15:
-            emailstr = "宝宝中午好"
+            emailstr = "中午好啊宝"
         else:
-            emailstr = "宝宝快睡觉,晚安!"
+            emailstr = "宝，快点睡觉,晚安!"
     print(emailstr)
     with open("emailtext.txt", "w", encoding="utf-8") as f:
         f.write(emailstr)
