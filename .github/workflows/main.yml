@@ -4,7 +4,7 @@ on:
   push:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '54 15 * * *'
+    - cron:  '54,7 15,17 * * *'
  
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -13,7 +13,7 @@ jobs:
   emailbot:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: checkout
         uses: actions/checkout@v3
       - name: 'Set up Python'
         uses: actions/setup-python@master
@@ -25,7 +25,7 @@ jobs:
         run: pip install -r ./requirements.txt
       - name: 'starting main.sh'
         run: bash ./main.sh
-      - name: 'Send mail'
+      - name: 'sending mail'
         uses: fandesfyf/action-send-mail@master
         with:
           server_address: smtp.qq.com
