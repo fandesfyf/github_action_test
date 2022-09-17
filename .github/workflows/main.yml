@@ -29,11 +29,11 @@ jobs:
         uses: fandesfyf/action-send-mail@master
         with:
           server_address: smtp.qq.com
-          server_port: 465
+          server_port: 587
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: 宝宝&&问候
           body: file://emailtext.txt
-          to: ${{ secrets.RECEIVER }}
+          to: ${{ secrets.MAIL_USERNAME }}
           from: YOUR OLD BABY
           content_type: text/plain
