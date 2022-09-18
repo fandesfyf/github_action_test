@@ -4,7 +4,7 @@ on:
   push:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '54,7 15,17 * * *'
+    - cron:  '54 15 * * *'
  
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
