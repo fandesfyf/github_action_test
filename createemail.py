@@ -97,11 +97,9 @@ def get_email():
                 tips += "天气有点凉了,记得盖好被子!\n"
             if high > 30 and random.randint(0, 80) % 5 == 0:
                 tips += "空调不要开太低!小心着凉!\n"
-            if random.randint(0, 100) % 5 == 0:
-                tips += "别告诉我你又跑出去了 哼~"
             if random.randint(0, 80) % 5 == 0:
                 tips += "放下那手机!"
-            emailstr = "晚安宝!\n"+get_iciba_everyday(False) if random.randint(0, 10) % 2 == 0 else "宝，该睡觉了\n" + tips
+            emailstr = "晚安宝!\n"+ weatherstr + "\n" +get_iciba_everyday(False) if random.randint(0, 10) % 2 == 0 else "宝，该睡觉了\n" + tips 
     except:
         print(sys.exc_info(), 92)
         if now < 10:
